@@ -37,6 +37,8 @@ namespace sql2.Controllers
             {
                 _db.items.Add(item);
                 _db.SaveChanges();
+                TempData["Success"]=" Data has been added succeffuly";
+
                 return RedirectToAction("Index");
             }
             return View(item); // إرجاع العرض في حالة فشل التحقق من النموذج
@@ -69,6 +71,8 @@ namespace sql2.Controllers
             {
                 _db.items.Update(item);
                 _db.SaveChanges();
+                TempData["Success"]=" Data has been Edited succeffuly";
+
                 return RedirectToAction("Index");
             }
             return View(item); // إرجاع العرض في حالة فشل التحقق من النموذج
@@ -101,6 +105,7 @@ namespace sql2.Controllers
             }
             _db.Remove(item);
             _db.SaveChanges();
+            TempData["Success"]=" Data has been deleted succeffuly";
             return RedirectToAction("Index");
         }
     }
