@@ -1,0 +1,47 @@
+﻿@model IEnumerable<items>
+@{
+    ViewData["Title"] = "Index";
+ }
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Items View</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a  asp-controller="items" asp-action="New" class="btn btn-primary"> Add New Item</a>
+        </div>
+    </div>
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr class="success">
+            <th>
+              Item name
+            </th>
+            <th>
+                Item price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+{
+                <tr>
+                    <td width="50%">
+                        @item.name
+                    </td>
+                    <td width="30%">
+                        @item.price
+                    </td>
+                    <td>
+                            <a  asp-controller="items" asp-action="New" class="btn btn-sm btn-success"> Add New Item</a>
+                    </td>
+                    <td>    <a  asp-controller="" asp-action="" class="btn  btn-sm btn-danger "> Delete  Item</a></td>
+                </tr>
+
+}
+    </tbody>
+
+</table>
+
+</div>
