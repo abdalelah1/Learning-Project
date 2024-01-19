@@ -1,0 +1,27 @@
+@model items
+@{
+    ViewData["Title"] = "Delete";
+ }
+
+<form method ="post" asp-action="Delete">
+    <input asp-for="id"  hidden/>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 clas="text-primary ">Delete</h2>
+            <hr>
+        </div>
+        <div class ="mb-3">
+            <label asp-for="name"></label>
+            <input asp-for="name" class="form-control"/>
+ 
+        </div>
+                <div class ="mb-3">
+            <label asp-for="price"></label>
+            <input asp-for="price" class="form-control"/>
+        </div>
+        <button type="submit" class = "btn btn-primary" style="width: 150px;"> Delete</button>
+        <a asp-action="Indx" asp-controller="Items" class="btn -btn-secondry " style="width: 150px;"> Back to items</a>
+    </div>
+</form> 
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>}

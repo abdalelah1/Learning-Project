@@ -34,9 +34,9 @@
                         @item.price
                     </td>
                     <td>
-                            <a  asp-controller="items" asp-action="New" class="btn btn-sm btn-success"> Add New Item</a>
+                            <a  asp-controller="items" asp-action="edit" asp-route-id="@item.id" class="btn btn-sm btn-success"> edit</a>
                     </td>
-                    <td>    <a  asp-controller="" asp-action="" class="btn  btn-sm btn-danger "> Delete  Item</a></td>
+                    <td>     <a  asp-controller="items" asp-action="Delete" asp-route-id="@item.id" class="btn btn-sm btn-danger"> Delete</a></td>
                 </tr>
 
 }
