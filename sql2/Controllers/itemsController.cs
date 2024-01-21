@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using sql2.Data;
 using sql2.Models;
 
@@ -10,6 +12,12 @@ namespace sql2.Controllers
 {
     public class itemsController : Controller
     {
+        public void CreateSelectList(int selectID=1)
+        {
+         List<Category> categories = _db.categories.ToList(); 
+         SelectList listItems=new SelectList(categories,"Id","Name",selectID);
+         ViewBag.CategoryList=listItems;
+        }
         public itemsController(AppDbcontext db)
         {
             _db = db;
@@ -18,17 +26,19 @@ namespace sql2.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            IEnumerable<Models.items> itemlist = _db.items.ToList();
+            IEnumerable<Models.items> itemlist = _db.items.Include(c=> c.Category).ToList();
             return View(itemlist);
         }
         public IActionResult New()
-        {
+        {   CreateSelectList();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult New(items item)
-        {
+        {  System.Console.WriteLine("************************************");
+            System.Console.WriteLine(item.categoryid);
+             System.Console.WriteLine("************************************");
             if (item.name == "100")
             {
                 ModelState.AddModelError("Name", "name can't equal 100   ");
@@ -57,6 +67,7 @@ namespace sql2.Controllers
             {
                 return NotFound();
             }
+            CreateSelectList(item.id);
             return View(item);
         }
         [HttpPost]
@@ -91,6 +102,7 @@ namespace sql2.Controllers
             {
                 return NotFound();
             }
+            CreateSelectList(item.id);
             return View(item);
         }
         [HttpPost ,ActionName("Delete")]
@@ -106,6 +118,7 @@ namespace sql2.Controllers
             _db.Remove(item);
             _db.SaveChanges();
             TempData["Success"]=" Data has been deleted succeffuly";
+            
             return RedirectToAction("Index");
         }
     }

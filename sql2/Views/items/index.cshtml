@@ -26,6 +26,9 @@
             <th>
                 Item price
             </th>
+            <th>
+                Category
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +40,9 @@
                     </td>
                     <td width="30%">
                         @item.price
+                    </td>
+                        <td width="30%">
+                        @item.Category.Name
                     </td>
                     <td>
                             <a  asp-controller="items" asp-action="edit" asp-route-id="@item.id" class="btn btn-sm btn-success"> edit</a>
